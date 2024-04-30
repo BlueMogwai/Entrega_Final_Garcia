@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} Reservas {% endblock title %}</title>
+    <title>{% block title %} xxxxx {% endblock title %}</title>
     <link rel="stylesheet" href="{% static 'bookings/css/bootstrap.css' %}">
 </head>
 <body>
@@ -13,6 +13,51 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            {% if user.is_authenticated %}
+            <ul class="navbar-nav">
+                <!-- Dropdown for Reserva -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkReserva" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Reservas
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkReserva">
+                        <a class="dropdown-item" href="">Todas las Reservas</a>
+                        <a class="dropdown-item" href="">Crear Reserva</a>
+                        <a class="dropdown-item" href="">Buscar Reserva por usuario</a>
+                    </div>
+                </li>
+                <!-- Dropdown for Clase -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkClase" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Clases
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkClase">
+                        <a class="dropdown-item" href="{% url 'clase-list' %}">Todas las Clases</a>
+                        <a class="dropdown-item" href="{% url 'clase-create' %}">Crear Clase</a>
+                        <a class="dropdown-item" href="{% url 'clase-buscar'%}">Buscar Clase</a>
+                    </div>
+                </li>
+            </ul>
+            {% endif %}
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout'%}">Logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'editar-perfil'%}">{{ user }}</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login'%}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Crear Usuario</a>
+                    </li>            
+                    {% endif %}
+                </ul>
+        </div>
     </nav>
     <!-- Main content -->
     <div class="container mt-4">
