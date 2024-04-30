@@ -22,9 +22,8 @@
                         Reservas
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkReserva">
-                        <a class="dropdown-item" href="">Todas las Reservas</a>
-                        <a class="dropdown-item" href="">Crear Reserva</a>
-                        <a class="dropdown-item" href="">Buscar Reserva por usuario</a>
+                        <a class="dropdown-item" href="{% url 'reserva-list' %}">Todas las Reservas</a>
+                        <a class="dropdown-item" href="{% url 'reserva-create' %}">Crear Reserva</a>
                     </div>
                 </li>
                 <!-- Dropdown for Clase -->
@@ -38,6 +37,17 @@
                         <a class="dropdown-item" href="{% url 'clase-buscar'%}">Buscar Clase</a>
                     </div>
                 </li>
+                <!-- Dropdown for Grupo -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkGrupo" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Grupos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkGrupo">
+                        <a class="dropdown-item" href="{% url 'grupo-list' %}">Todos los Grupos</a>
+                        <a class="dropdown-item" href="{% url 'grupo-create' %}">Crear Grupo</a>
+                        <a class="dropdown-item" href="{% url 'grupo-buscar'%}">Buscar Grupo</a>
+                    </div>
+                </li>              
             </ul>
             {% endif %}
             <ul class="navbar-nav ml-auto">

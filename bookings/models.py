@@ -5,44 +5,28 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-class Size(models.Model):
-    duo = "duo"
-    trio = "trio"
-    cuarteto = "cuarteto"
-    combo = "combo"
-
-    size_choices = [
-        (duo, "duo"),
-        (trio, "trio"),
-        (cuarteto, "cuarteto"),
-        (combo, "combo"),
-    ]
-
-    size = models.CharField(max_length=10, choices=size_choices)
+class Size(models.TextChoices):
+    duo = "duo", ("Duo")
+    trio = "trio", ("Trio")
+    cuarteto = "cuarteto", ("Cuarteto")
+    combo = "combo", ("Combo")
 
 
-class Tipo(models.Model):
-    instrumental = "instrumental"
-    con_voz = "convoz"
-
-    tipo_choices = [
-        (instrumental, "Grupo instrumental"),
-        (con_voz, "Grupo con vocalista"),
-    ]
-
-    tipo = models.CharField(max_length=20, choices=tipo_choices)
+class Tipo(models.TextChoices):
+    instrumental = "instrumental", ("Instrumental")
+    con_voz = "convoz", ("Con Voz")
 
 
 class Grupo(models.Model):
     nombre = models.CharField(max_length=100)
     size = models.CharField(
         max_length=20,
-        choices=Size.size_choices,
+        choices=Size.choices,
         default=Size.combo
         )
     tipo = models.CharField(
         max_length=20,
-        choices=Tipo.tipo_choices,
+        choices=Tipo.choices,
         default=Tipo.instrumental
         )
     descripcion = models.CharField(max_length=500)

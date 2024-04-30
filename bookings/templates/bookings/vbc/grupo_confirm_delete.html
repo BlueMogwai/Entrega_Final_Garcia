@@ -1,0 +1,28 @@
+{% extends 'bookings/base.html' %}
+
+{% block title %}Confirmar{% endblock %}
+
+{% block content %}
+
+
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <p>Seguro que quieres borrar "{{ object.nombre }}"?</p>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-danger" value="Confirmar">
+                            <a href="{% url 'grupo-list' %}">Cancelar</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

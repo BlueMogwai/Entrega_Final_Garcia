@@ -1,0 +1,28 @@
+{% extends 'bookings/base.html' %}
+
+{% block title %}Detalle del Grupo{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="text-right mb-3">
+                    <a href="#" class="btn btn-primary" onclick="history.back()">Volver</a>
+                </div>
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        Detalle del Grupo
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ detalle_grupo.nombre }}</h5>
+                        <p class="card-text">Size: {{ detalle_grupo.get_size_display }}</p>
+                        <p class="card-text">Tipo: {{ detalle_grupo.get_tipo_display }}</p>
+                        <p class="card-text">Descripción: {{ detalle_grupo.descripcion | default:"No proporcionado" }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'bookings/base.html' %}
+
+{% block title %} Listado de Reservas {% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+                <h2 class="mb-0">Reservas</h2>
+            </div>
+            <div>
+                <a href="{% url 'reserva-create' %}" class="btn btn-success mr-2">Crear Reserva</a>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Clase</th>
+                    <th scope="col">Instrumento</th>
+                    <th scope="col">Seccion</th>
+                    <th scope="col">Experiencia</th>
+                    <th scope="col">Presentacion</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Hora de Inicio</th>
+                    <th scope="col">Hora de Fin</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if todas_las_reservas %}
+                {% for reserva in todas_las_reservas %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ reserva.nombre }}</td>
+                    <td>{{ reserva.clase}}</td>
+                    <td>{{ reserva.instrumento}}</td>
+                    <td>{{ reserva.seccion}}</td>
+                    <td>{{ reserva.experiencia}}</td>
+                    <td>{{ reserva.presentacion}}</td>
+                    <td>{{ reserva.fecha|date:"d/m/Y" }}</td>
+                    <td>{{ reserva.hora_inicio|time:"H:i" }}</td>
+                    <td>{{ reserva.hora_fin|time:"H:i" }}</td>
+                    <td class="d-flex align-items-center">
+                        <a href="{% url 'reserva-detail' reserva.id %}" class="btn btn-primary btn-sm mr-1">Ver</a>
+                        <a href="{% url 'reserva-update' reserva.id %}" class="btn btn-primary btn-sm mr-1">Editar</a>
+                        <a href="{% url 'reserva-delete' reserva.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="7">No hay Reservas.</td>
+                </tr>
+                {% endif %}
+
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

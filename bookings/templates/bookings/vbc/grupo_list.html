@@ -1,0 +1,49 @@
+{% extends 'bookings/base.html' %}
+
+{% block title %} Listado de Grupos {% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="mb-0">Grupos</h2>
+            <a href="{% url 'grupo-create'%}" class="btn btn-success">Crear Grupo</a>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Size</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Acciones</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% if todos_los_grupos %}
+                {% for grupo in todos_los_grupos %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ grupo.nombre }}</td>
+                    <td>{{ grupo.get_size_display }}</td>
+                    <td>{{ grupo.get_tipo_display }}</td>
+                    <td>{{ grupo.descripcion }}</td>
+                    <td>
+                        <a href="{% url 'grupo-detail' grupo.id %}" class="btn btn-primary btn-sm">Ver</a>
+                        <a href="{% url 'grupo-update' grupo.id %}" class="btn btn-primary btn-sm">Editar</a>
+                        <a href="{% url 'grupo-delete' grupo.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="7">No hay grupos.</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}
