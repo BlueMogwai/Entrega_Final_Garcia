@@ -2,6 +2,7 @@ from django.urls import path
 
 from .views import (
     home_view,
+    about_view,
     ClaseListView,
     ClaseDetailView,
     ClaseDeleteView,
@@ -30,6 +31,7 @@ from .views import (
 
 urlpatterns = [
     path("", home_view, name="home"),
+    path("about/", about_view, name="about"),
     path("clase/list/", ClaseListView.as_view(), name="clase-list"),
     path("clase/<int:pk>/detail/", ClaseDetailView.as_view(), name="clase-detail"),
     path("clase/<int:pk>/delete/", ClaseDeleteView.as_view(), name="clase-delete"),

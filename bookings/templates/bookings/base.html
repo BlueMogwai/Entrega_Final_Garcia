@@ -66,6 +66,11 @@
                             <a href="{% url 'avatar_add' %}" class="nav-link">Add Avatar</a>
                         </li>
                     </li>
+
+                <!-- Botón About -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}">About</a>
+                </li>
                 {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'login' %}">Login</a>

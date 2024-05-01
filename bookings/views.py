@@ -22,6 +22,10 @@ def home_view(request):
     return render(request, "bookings/home.html")
 
 
+def about_view(request):
+    return render(request, "bookings/about.html")
+
+
 class ClaseListView(LoginRequiredMixin, ListView):
     model = Clase
     template_name = "bookings/vbc/clase_list.html"
