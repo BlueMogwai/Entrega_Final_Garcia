@@ -60,3 +60,11 @@ class Reserva(models.Model):
 
     def __str__(self):
         return f"¡{self.nombre} ha reservado la clase {self.clase}!"
+    
+
+class Avatar(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='avatar')
+    image = models.ImageField(upload_to='avatars/')
+
+    def __str__(self):
+        return f"Avatar para {self.user.username}"

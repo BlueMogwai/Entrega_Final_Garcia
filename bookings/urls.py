@@ -22,6 +22,7 @@ from .views import (
     ReservaDeleteView,
     ReservaUpdateView,
     ReservaCreateView,
+    avatar_view,
 
 )
 
@@ -48,5 +49,6 @@ urlpatterns = [
     path("login/", user_login_view, name="login"),
     path("logout/", user_logout_view, name="logout"),
     path('editar-perfil/', UserUpdateView.as_view(), name='editar-perfil'),
+    path('avatar/add/',avatar_view, name='avatar_add'),
 
 ]

@@ -1,6 +1,6 @@
-from .models import Grupo, Clase, Reserva
+from .models import Grupo, Clase, Reserva, Avatar
 from .forms import UserEditForm
-from .forms import ClaseSearchForm, GrupoSearchForm
+from .forms import ClaseSearchForm, GrupoSearchForm, AvatarCreateForm
 from django import forms
 from django.urls import reverse_lazy
 from django.views.generic import(
@@ -17,7 +17,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 # from django.contrib.auth.mixins import rom django.contrib.auth.decorators import login_required
 
-# Create your views here.
 
 def home_view(request):
     return render(request, "bookings/home.html")
@@ -186,3 +185,22 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_object(self):
         return self.request.user
+    
+
+def avatar_view(request):
+    if request.method == "GET":
+        contexto = {"avatar": AvatarCreateForm()}
+    else:
+        form = AvatarCreateForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = form.cleaned_data["image"]
+            avatar_existente = Avatar.objects.filter(user=request.user)
+            avatar_existente.delete()
+            nuevo_avatar = Avatar(image=image, user=request.user)
+            nuevo_avatar.save()
+            return redirect("home")
+        else:
+            contexto = {"avatar": form}
+
+
+    return render(request, "bookings/avatar_create.html", context=contexto)
