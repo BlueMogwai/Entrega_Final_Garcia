@@ -16,16 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
 from django.http import HttpResponse
+from django.views.generic.base import RedirectView
+
 
 def home_view(request):
     return HttpResponse("<h1>Bienvenido a Clase con Big Band</h1>")
 
 urlpatterns = [
-    path("", home_view),
     path('admin/', admin.site.urls),
-    path("bookings/", include("bookings.urls"))
+    path("bookings/", include("bookings.urls")),
+    path("", RedirectView.as_view(url="/bookings/", permanent=True)),
 ]
 
 from django.conf.urls.static import static

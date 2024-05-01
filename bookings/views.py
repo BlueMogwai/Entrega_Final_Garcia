@@ -15,7 +15,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
-# from django.contrib.auth.mixins import rom django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 
 
 def home_view(request):
@@ -55,6 +55,7 @@ class ClaseCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy("clase-list")
 
 
+@login_required
 def clase_search_view(request):
     if request.method == "GET":
         form = ClaseSearchForm()
@@ -65,7 +66,7 @@ def clase_search_view(request):
         form = ClaseSearchForm(request.POST)
         if form.is_valid():
             nombre_de_clase = form.cleaned_data["nombre"]
-            clases_encontradas = Clase.objects.filter(nombre=nombre_de_clase).all()
+            clases_encontradas = Clase.objects.filter(nombre__icontains=nombre_de_clase)
             contexto_dict = {"todas_las_clases": clases_encontradas}
             return render(request, "bookings/vbc/clase_list.html", contexto_dict)
         else:
@@ -107,6 +108,20 @@ class GrupoCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy("grupo-list")
 
 
+def user_creation_view(request):
+    if request.method == "GET":
+        form = UserCreationForm()
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect("home")
+    
+    return render(request, "bookings/crear-usuario.html", {"form": form})
+
+
+@login_required
 def grupo_search_view(request):
     if request.method == "GET":
         form = GrupoSearchForm()
@@ -117,7 +132,7 @@ def grupo_search_view(request):
         form = GrupoSearchForm(request.POST)
         if form.is_valid():
             nombre_del_grupo = form.cleaned_data["nombre"]
-            grupos_encontrados = Grupo.objects.filter(nombre=nombre_del_grupo).all()
+            grupos_encontrados = Grupo.objects.filter(nombre__icontains=nombre_del_grupo)
             contexto_dict = {"todos_los_grupos": grupos_encontrados}
             return render(request, "bookings/vbc/grupo_list.html", contexto_dict)
         else:
