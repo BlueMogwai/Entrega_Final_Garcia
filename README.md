@@ -2,7 +2,7 @@
 ### alumna: Sara García Gómez
 
 # Clase con Big Bands
-### La web "Clase con Big Bands" es una web para poder reservar clases con grupos profesionales, así como para añadir tu grupo y ayudar a nuevos músicos:
+### La web "Clase con Big Bands" es una web para poder reservar clases con grupos profesionales, así como para añadir tu grupo, oferecer clases y ayudar a nuevos músicos:
 
 ## Instrucciones
 
